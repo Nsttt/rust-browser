@@ -4,8 +4,8 @@ pub type AttrMap = HashMap<String, String>;
 
 #[derive(Debug)]
 pub struct Node {
-    children: Vec<Node>,
-    node_type: NodeType,
+    pub children: Vec<Node>,
+    pub node_type: NodeType,
 }
 
 #[derive(Debug)]
@@ -16,8 +16,8 @@ pub enum NodeType {
 
 #[derive(Debug)]
 pub struct ElementData {
-    tag_name: String,
-    attributes: AttrMap,
+    pub tag_name: String,
+    pub attributes: AttrMap,
 }
 
 pub fn text(data: String) -> Node {
@@ -38,6 +38,10 @@ pub fn elem(name: String, attrs: AttrMap, children: Vec<Node>) -> Node {
 }
 
 impl ElementData {
+    pub fn get_attribute(&self, key: &str) -> Option<&String> {
+        self.attributes.get(key)
+    }
+
     pub fn id(&self) -> Option<&String> {
         self.attributes.get("id")
     }
